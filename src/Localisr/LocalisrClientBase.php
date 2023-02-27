@@ -15,8 +15,8 @@ abstract class LocalisrClientBase implements LocalisrClientInterface
      *
      * @var string
      */
-//    public static $BASE_URL = "https://localisr.com/v1/";
-    public static $BASE_URL = "http://localisr.test/v1/";
+    public static $BASE_URL = "https://localisr.com/v1/";
+//    public static $BASE_URL = "http://localisr.test/v1/";
 
     /**
      * VERIFY_SSL is defaulted to "true".
@@ -30,7 +30,7 @@ abstract class LocalisrClientBase implements LocalisrClientInterface
      * than using no encryption at all.
      *
      */
-    public static $VERIFY_SSL= false;
+    public static $VERIFY_SSL= true;
 
     protected $authorization_header = "X-Localisr-Authorization-Token";
     protected $authorization_token = NULL;
