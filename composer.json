@@ -1,0 +1,28 @@
+{
+    "name": "localisr/localisr",
+    "description": "Manage your website translations",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "multilanguage",
+        "translations manager",
+        "internationalisation"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Siantech\\Localisr\\": "src/Localisr"
+        }
+    },
+    "authors": [
+        {
+            "name": "SiaNTech LTD",
+            "homepage": "https://siantech.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "guzzlehttp/guzzle": "^6.5.8 || ^7.4.5",
+        "guzzlehttp/psr7": "^1.8.5 || ^2.3"
+    }
+}
