@@ -34,7 +34,7 @@ class DocumentsService extends AbstractService
             'name' => $document->getName()
         ];
 
-        return $this->request('POST', 'document', $params, []);
+        return $this->request('POST', 'documents', $params, []);
     }
 
     /**
@@ -48,50 +48,21 @@ class DocumentsService extends AbstractService
             'name' => $document->getName()
         ];
 
-        return $this->request('PATCH', 'document/' . $document->getId(), $params, []);
+        return $this->request('PATCH', 'documents/' . $document->getId(), $params, []);
     }
 
     /**
      * @throws LocalisrException
      */
-    public function getOneByReference($reference): Document
+    public function getOne($reference): Document
     {
-        $params = [
-            'reference' => $reference
-        ];
-
         try {
-            $response = $this->request('GET', 'document/getOneByReference', $params);
+            $response = $this->request('GET', 'documents/' . $reference);
 
             $document = new Document();
             $document->setId($response['document']['uuid']);
             $document->setName($response['document']['name']);
             $document->setReference($reference);
-
-            return $document;
-        } catch (LocalisrException $e) {
-            throw $e;
-        }
-    }
-
-    /**
-     * Get a Document by it's Localisr id
-     *
-     * @throws LocalisrException
-     */
-    public function getOne($id): Document
-    {
-        $params = [
-            'uuid' => $id
-        ];
-
-        try {
-            $response = $this->request('GET', 'document', $params);
-
-            $document = new Document();
-            $document->setId($response['document']['uuid']);
-            $document->setName($response['document']['name']);
-            $document->setReference($response['document']['external_reference']);
 
             return $document;
         } catch (LocalisrException $e) {
@@ -106,11 +77,7 @@ class DocumentsService extends AbstractService
      */
     public function deleteOne($reference)
     {
-        $params = [
-            'reference' => $reference
-        ];
-
-        return $this->request('DELETE', 'document', $params);
+        return $this->request('DELETE', "documents/{$reference}");
     }
 
     /**
@@ -124,12 +91,7 @@ class DocumentsService extends AbstractService
      */
     public function getDocumentTranslation($reference)
     {
-        $params = [
-            'document_uuid' => $reference,
-            'language' => $this->client->getLanguage() ?? null
-        ];
-
-        $response = $this->request('GET', 'document/translation', $params);
+        $response = $this->request('GET', "documents/translations/{$this->client->getLanguage()}/{$reference}");
 
         $translation = $response['translation'];
 
@@ -163,6 +125,6 @@ class DocumentsService extends AbstractService
 //            'metaDescription' => $documentTranslation->getMetaDescription()
         ];
 
-        $response = $this->request('POST', 'document/translation', $params);
+        $response = $this->request('POST', "documents/translations/{$this->client->getLanguage()}/{$documentTranslation->getParentId()}", $params);
     }
 }

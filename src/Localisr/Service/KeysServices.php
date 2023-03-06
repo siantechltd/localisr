@@ -21,17 +21,13 @@ class KeysServices extends AbstractService
         }
     }
 
-    public function getOne($code){
-
-        $params = [
-            'code' => $code
-        ];
+    public function getOne($slug){
 
         try {
-            $response = $this->request('GET', 'key/getOneByCode', $params);
+            $response = $this->request('GET', "keys/{$slug}");
 
             $key = new Key();
-            $key->setCode($response['key']['slug']);
+            $key->setSlug($response['key']['slug']);
             $key->setId($response['key']['uuid']);
 
             return $key;
@@ -43,7 +39,7 @@ class KeysServices extends AbstractService
 
     public function getTranslation(Key $key){
 
-        $path = $this->client->getLanguage() . '?key=' . $key->getCode();
+        $path = "keys/translations/{$this->client->getLanguage()}/{$key->getSlug()}";
 
         try {
             $response = $this->request('GET', $path);
@@ -62,7 +58,9 @@ class KeysServices extends AbstractService
             'translation' => $keyTranslation->getTranslation(),
         ];
 
-        $response = $this->request('POST', 'key/translation', $params);
+        $response = $this->request('POST', "keys/translations/{$this->client->getLanguage()}/{$keyTranslation->getKeyId()}", $params);
+
+        return $response;
     }
 
 

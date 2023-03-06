@@ -5,15 +5,15 @@ namespace Siantech\Localisr\Models;
 class Key
 {
     private $id;
-    private $code;
+    private $slug;
 
-    public function setCode($code){
-        $this->code = $code;
+    public function setSlug($slug){
+        $this->slug = $slug;
         return $this;
     }
 
-    public function getCode(){
-        return $this->code;
+    public function getSlug(){
+        return $this->slug;
     }
 
     public function setId($id){
