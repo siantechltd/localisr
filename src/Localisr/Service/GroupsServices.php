@@ -6,7 +6,7 @@ class GroupsServices extends AbstractService
 {
     public function getGroupKeysTranslations($group)
     {
-        $path = $this->client->getLanguage() . '?group=' . $group;
+        $path = "groups/translations/{$this->client->getLanguage()}/{$group}";
 
         return $this->request('GET', $path);
     }
