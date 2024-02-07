@@ -32,75 +32,104 @@ class DocumentTranslation
         return $this;
     }
 
-    public function setParentId($id){
+    public function setParentId($id)
+    {
         $this->parentId = $id;
         return $this;
     }
 
-    public function getParentId(){
+    public function getParentId()
+    {
         return $this->parentId;
     }
 
-    public function setTitle($title){
+    public function setTitle($title)
+    {
         $this->title = $title;
         return $this;
     }
 
-    public function getTitle(){
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function setSlug($slug){
+    public function setSlug($slug)
+    {
         $this->slug = $slug;
         return $this;
     }
 
-    public function getSlug(){
+    public function getSlug()
+    {
         return $this->slug;
     }
 
-    public function setHeadline($headline){
+    public function setHeadline($headline)
+    {
         $this->headline = $headline;
         return $this;
     }
 
-    public function getHeadline(){
+    public function getHeadline()
+    {
         return $this->headline;
     }
 
-    public function setBody($body){
+    public function setBody($body)
+    {
         $this->body = $body;
         return $this;
     }
 
-    public function getBody(){
+    public function getBody()
+    {
         return $this->body;
     }
 
-    public function setTags($tags){
+    public function setTags($tags)
+    {
         $this->tags = $tags;
         return $this;
     }
 
-    public function getTags(){
+    public function getTags()
+    {
         return $this->tags;
     }
 
-    public function setKeywords($keywords){
+    public function setKeywords($keywords)
+    {
         $this->keywords = $keywords;
         return $this;
     }
 
-    public function getKeywords(){
+    public function getKeywords()
+    {
         return $this->keywords;
     }
 
-    public function setMetaDescription($description){
+    public function setMetaDescription($description)
+    {
         $this->metaDescription = $description;
         return $this;
     }
 
-    public function getMetaDescription(){
+    public function getMetaDescription()
+    {
         return $this->metaDescription;
+    }
+
+    public function __toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'slug' => $this->getSlug(),
+            'headline' => $this->getHeadline(),
+            'body' => $this->getBody(),
+            'keywords' => $this->getKeywords(),
+            'metaDescription' => $this->getMetaDescription()
+        ];
     }
 }

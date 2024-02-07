@@ -89,25 +89,27 @@ class DocumentsService extends AbstractService
      * @return void
      * @throws Core\LocalisrException
      */
-    public function getDocumentTranslation($reference)
+    public function getDocumentTranslation($reference): ?DocumentTranslation
     {
         $response = $this->request('GET', "documents/translations/{$this->client->getLanguage()}/{$reference}");
 
-        $translation = $response['translation'];
+        $translation = $response['translation'] ?? null;
 
-        $documentTranslation = new DocumentTranslation();
         if ($translation) {
+            $documentTranslation = new DocumentTranslation();
             $documentTranslation->setLanguage($this->client->getLanguage());
-            $documentTranslation->setId($response['translation']['uuid']);
-            $documentTranslation->setTitle($response['translation']['title']);
-            $documentTranslation->setSlug($response['translation']['slug']);
-            $documentTranslation->setHeadline($response['translation']['headline'] ?? null);
-            $documentTranslation->setBody($response['translation']['body']);
-            $documentTranslation->setKeywords($response['translation']['keywords']);
-            $documentTranslation->setMetaDescription($response['translation']['meta_description']);
+            $documentTranslation->setId($translation['uuid']);
+            $documentTranslation->setTitle($translation['title']);
+            $documentTranslation->setSlug($translation['slug']);
+            $documentTranslation->setHeadline($translation['headline'] ?? null);
+            $documentTranslation->setBody($translation['body']);
+            $documentTranslation->setKeywords($translation['keywords']);
+            $documentTranslation->setMetaDescription($translation['meta_description']);
+
+            return $documentTranslation;
         }
 
-        return $documentTranslation;
+        return null;
     }
 
     public function saveDocumentTranslation(DocumentTranslation $documentTranslation)

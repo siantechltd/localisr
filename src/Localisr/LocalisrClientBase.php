@@ -79,7 +79,7 @@ abstract class LocalisrClientBase implements LocalisrClientInterface
         $client = $this->getClient();
 
         $options = [
-//            RequestOptions::HTTP_ERRORS => false,
+            RequestOptions::HTTP_ERRORS => false,
             RequestOptions::HEADERS => [
                 'User-Agent' => "Localisr-PHP (PHP Version:{$this->version}, OS:{$this->os})",
                 'Accept' => 'application/json',
@@ -144,7 +144,7 @@ abstract class LocalisrClientBase implements LocalisrClientInterface
                 $body = json_decode($response->getBody(), true);
                 $ex->httpStatusCode = $response->getStatusCode();
                 $ex->localisrApiErrorCode = $response->getStatusCode();
-                $ex->message = $body['message'];
+                $ex->message = $body['message'] ?? '';
                 throw $ex;
         }
 
